@@ -1,6 +1,6 @@
 package com.FabioAssignment4;
 
-public class User {
+public class User implements Comparable<User>{
 	
 	private String username;
 	private String password;
@@ -37,5 +37,16 @@ public class User {
 
 	public void setRole(String role) {
 		this.role = role;
+	}
+
+	@Override
+	public int compareTo(User that) {
+	
+		if (this.role.contains("super_user") && that.role.contains("super_user")) {
+			return this.username.compareTo(that.username);
+		} else if (this.role.contains("normal_user") && that.role.contains("normal_user")) {
+			return this.username.compareTo(that.username);
+		} return 1;
+				
 	}
 }
