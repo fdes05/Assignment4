@@ -29,62 +29,77 @@ public class UserLoginApplication2 {
 				while (superUserLevel == true) {
 					superUserInput = superUserPrompt();
 					if (superUserInput == 0) {
-						main(args);
+						String normalUser = promptForInput2("Which user would you like to login as?");
+						String normalUserName = normalUserNameVerification(normalUser);
+						String normalUserPassword = normalUserPasswordVerification(normalUser);
+						if (normalUserName != null) {
+							System.out.println("Welcome: " + normalUserName);
+							normalUserInput = 10;
+							matchedUser = userService.compareUserInputToFile(normalUser, normalUserPassword);
+							superUserLevel = false;
+							break;
+						} else {
+							System.out.println("There is no such user!");
+							System.out.println("Exiting...");
+							System.exit(0);
+						}
 
 					} else if (superUserInput == 1) {
 						System.out.println("Please type the new username");
 						scanner.nextLine();
 						String newUsername = scanner.nextLine();
 						extendedUser.usernameChange(newUsername, matchedUser);
-						
+
 					} else if (superUserInput == 2) {
 						System.out.println("Please type the new password");
 						scanner.nextLine();
 						String newPassword = scanner.nextLine();
 						extendedUser.passwordChange(newPassword, matchedUser);
-						
+
 					} else if (superUserInput == 3) {
 						System.out.println("Please type the new name");
 						scanner.nextLine();
 						String newName = scanner.nextLine();
 						extendedUser.nameChange(newName, matchedUser);
-						
+
 					} else if (superUserInput == 4) {
 						System.out.println("Exiting...");
 						System.exit(0);
 					} else {
 						System.out.println("This is not a valid option! Please try again.");
 					}
-					
-				}  
-				
+
+				}
+
 				while (superUserLevel != true) {
-						normalUserInput = normalUserPrompt();
+					normalUserInput = normalUserPrompt();
 					if (normalUserInput == 0) {
 						System.out.println("Please type the new username");
 						scanner.nextLine();
 						String newUsername = scanner.nextLine();
 						extendedUser.usernameChange(newUsername, matchedUser);
-						
+
 					} else if (normalUserInput == 1) {
 						System.out.println("Please type the new password");
 						scanner.nextLine();
 						String newPassword = scanner.nextLine();
 						extendedUser.passwordChange(newPassword, matchedUser);
-						
+
 					} else if (normalUserInput == 2) {
 						System.out.println("Please type the new name");
 						scanner.nextLine();
 						String newName = scanner.nextLine();
 						extendedUser.nameChange(newName, matchedUser);
-						
+
 					} else if (normalUserInput == 3) {
 						System.out.println("Exiting...");
 						System.exit(0);
+					} else if (normalUserInput == 10) {
+
 					} else {
 						System.out.println("This is not a valid option! Please try again.");
 					}
-					
+
 				}
 
 			} else if (i >= 5) {
@@ -97,8 +112,33 @@ public class UserLoginApplication2 {
 
 	}
 
+	private static String normalUserNameVerification(String normalUser) {
+		for (User users : UserService2.userCredentialsArray) {
+			if (users.getUsername().equals(normalUser)) {
+				return users.getName();
+			}
+		}
+		return null;
+	}
+	
+	private static String normalUserPasswordVerification(String normalUser) {
+		for (User users : UserService2.userCredentialsArray) {
+			if (users.getUsername().equals(normalUser)) {
+				return users.getPassword();
+			}
+		}
+		return null;
+	}
+
 	public static String promptForInput(String promptMessage) {
 		System.out.println(promptMessage);
+		String property = scanner.nextLine();
+		return property;
+	}
+
+	public static String promptForInput2(String promptMessage) {
+		System.out.println(promptMessage);
+		scanner.nextLine();
 		String property = scanner.nextLine();
 		return property;
 	}
@@ -124,4 +164,5 @@ public class UserLoginApplication2 {
 		return -1;
 
 	}
+
 }

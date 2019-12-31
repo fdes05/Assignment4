@@ -7,9 +7,9 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
-public class UserService2{
+public class UserService2 {
 
-	static User[] userCredentialsArray = new User[5];
+	static User[] userCredentialsArray = new User[20];
 
 	public User createUser(String username, String password, String name, String role) {
 		User user = new User();
@@ -56,10 +56,8 @@ public class UserService2{
 		}
 
 		for (int i = 0; i < userCredentialsArray.length; i++) {
-			System.out.println((userCredentialsArray[i].getUsername()) + " "  
-					+ (userCredentialsArray[i].getPassword()) + " "
-					+ (userCredentialsArray[i].getName()) + " "
-					+ (userCredentialsArray[i].getRole()));
+			System.out.println((userCredentialsArray[i].getUsername()) + " " + (userCredentialsArray[i].getPassword())
+					+ " " + (userCredentialsArray[i].getName()) + " " + (userCredentialsArray[i].getRole()));
 		}
 
 	}
@@ -76,14 +74,14 @@ public class UserService2{
 			if (usernameA.equalsIgnoreCase(usernameInput) && passwordA.equals(passwordInput)) {
 				return userCredentialsArray[i];
 			}
-		
+
 		}
 		return null;
-	
+
 	}
+
 	public void userLoginWriting(User[] userCredentials) throws IOException {
 
-		
 		BufferedWriter fileWriter = null;
 
 		try {
@@ -94,7 +92,7 @@ public class UserService2{
 			String password;
 			String name;
 			String role;
-			
+
 			for (int i = 0; i < userCredentials.length; i++) {
 				username = userCredentials[i].getUsername();
 				password = userCredentials[i].getPassword();
@@ -103,7 +101,7 @@ public class UserService2{
 				line = username + ", " + password + ", " + name + ", " + role;
 				fileWriter.write(line + "\n");
 			}
-				
+
 		} catch (FileNotFoundException e) {
 			System.out.println("File was not found!");
 			e.printStackTrace();
@@ -117,9 +115,8 @@ public class UserService2{
 		}
 
 		for (int i = 0; i < userCredentialsArray.length; i++) {
-			System.out.println(("Line has been writen to file: " + userCredentialsArray[i].getUsername()) + " "  
-					+ (userCredentialsArray[i].getPassword()) + " "
-					+ (userCredentialsArray[i].getName()) + " "
+			System.out.println(("Line has been writen to file: " + userCredentialsArray[i].getUsername()) + " "
+					+ (userCredentialsArray[i].getPassword()) + " " + (userCredentialsArray[i].getName()) + " "
 					+ (userCredentialsArray[i].getRole()));
 		}
 	}

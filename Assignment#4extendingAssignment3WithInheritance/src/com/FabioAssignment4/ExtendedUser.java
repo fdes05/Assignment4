@@ -32,7 +32,7 @@ public class ExtendedUser extends User {
 		}
 		userService.userLoginWriting(userCredentialsArray);
 	}
-	
+
 	public void passwordChange(String password, User matchedUser) throws IOException {
 		String correctedPassword = password;
 		matchedUser.setPassword(correctedPassword);
@@ -54,10 +54,10 @@ public class ExtendedUser extends User {
 				+ matchedUser.getName());
 		Arrays.sort(userCredentialsArray);
 		System.out.println("-----Sorted-----");
-		for(int i = 0;i<UserService2.userCredentialsArray.length;i++){
-			System.out.println((userCredentialsArray[i].getUsername()) + " " + (userCredentialsArray[i].getPassword()) + " "
-					+ (userCredentialsArray[i].getName()) + (userCredentialsArray[i].getRole()));
-			}
+		for (int i = 0; i < UserService2.userCredentialsArray.length; i++) {
+			System.out.println((userCredentialsArray[i].getUsername()) + " " + (userCredentialsArray[i].getPassword())
+					+ " " + (userCredentialsArray[i].getName()) + (userCredentialsArray[i].getRole()));
+		}
 		userService.userLoginWriting(userCredentialsArray);
 	}
 
